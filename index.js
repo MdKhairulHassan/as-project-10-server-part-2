@@ -1196,7 +1196,7 @@ async function connectMongoOnce() {
       await temporaryClient.connect();
 
       // ============ // .command() is a lower-level tool used to check server health, modify configurations, or run optimizations. And The .db() function tells the MongoDB client: "Hey, focus all my next operations on this specific database."
-      // await temporaryClient.db('admin').command({ ping: 1 }); // Some platforms are not good for ping.
+      await temporaryClient.db('admin').command({ ping: 1 }); // Some platforms are not good for ping.
 
       console.log(
         `MongoDB connected using ${
