@@ -57,6 +57,12 @@ app.use(cors());
 
 app.use(express.json({ limit: '10kb' }));
 
+app.get('/', (req, res) => {
+  res.status(200).send({
+    message: 'Personal finance management server is running.',
+  });
+});
+
 // --------------------------------------------------
 // Helpers
 // --------------------------------------------------
@@ -239,12 +245,6 @@ async function connectMongoOnce() {
 // Routes
 // --------------------------------------------------
 function registerRoutes(transactionsCollection) {
-  app.get('/', (req, res) => {
-    res.status(200).send({
-      message: 'Personal finance management server is running.',
-    });
-  });
-
   app.get(
     '/transactions',
     verifyFireBaseToken,
@@ -494,3 +494,5 @@ const shutdown = async () => {
 process.on('SIGINT', shutdown);
 
 process.on('SIGTERM', shutdown);
+
+module.exports = app;
