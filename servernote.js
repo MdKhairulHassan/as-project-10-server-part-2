@@ -2442,7 +2442,7 @@
 // // =============== // SIGTERM is a “please stop the server” signal. Hosting platforms often send it when they restart, redeploy, or stop your server. Then Node.js runs shutdown().
 // process.on('SIGTERM', shutdown);
 
-// ===================================================================================================================================
+// =======================================================================================================================
 // {
 //   "name": "personal-finance-management-server",
 //   "version": "1.0.0",
@@ -2463,5 +2463,36 @@
 //     "firebase-admin": "^14.4.0",
 //     "jsonwebtoken": "^9.0.3",
 //     "mongodb": "^7.2.0"
+//   }
+// }
+
+// ======================================================================================================================= downgrade jose version
+// {
+//   "name": "personal-finance-management-server",
+//   "version": "1.0.0",
+//   "description": "",
+//   "main": "index.js",
+//   "scripts": {
+//     "start": "node index.js",
+//     "test": "echo \"Error: no test specified\" && exit 1"
+//   },
+//   "keywords": [],
+//   "author": "",
+//   "license": "ISC",
+//   "type": "commonjs",
+//   "dependencies": {
+//     "cors": "^2.8.6",
+//     "dotenv": "^17.4.2",
+//     "express": "^5.2.1",
+//     "firebase-admin": "^14.4.0",
+//     "jsonwebtoken": "^9.0.3",
+//     "mongodb": "^7.2.0"
+//   },
+//   "overrides": {
+//     "firebase-admin": {
+//       "jwks-rsa": {
+//         "jose": "4.15.9"
+//       }
+//     }
 //   }
 // }

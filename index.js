@@ -49,37 +49,37 @@ initializeApp({
 // --------------------------------------------------
 // CORS and body parsing
 // --------------------------------------------------
-// const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
-//   .split(',')
-//   .map(origin => origin.trim())
-//   .filter(Boolean);
+const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
+  .split(',')
+  .map(origin => origin.trim())
+  .filter(Boolean);
 
 // ============= // app.use() is not a normal JavaScript function—it is an Express function to tells Express: “Use this middleware for every incoming request.”
-// app.use(
-//   cors({
-//     // origin(origin, callback) {
-//     //   // Allows Postman and server-to-server requests.
-//     //   if (!origin || allowedOrigins.includes(origin)) {
-//     //     return callback(null, true);
-//     //   }
+app.use(
+  cors({
+    origin(origin, callback) {
+      // Allows Postman and server-to-server requests.
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
 
-//     //   return callback(new Error('Origin is not allowed by CORS.'));
-//     // },
+      return callback(new Error('Origin is not allowed by CORS.'));
+    },
 
-//     // ============= // These tell CORS which browser requests your backend will allow.
-//     // This allows only these request methods:
-//     // - GET → read transactions
-//     // - POST → create transaction
-//     // - PATCH → update transaction
-//     // - DELETE → delete transaction
-//     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    // ============= // These tell CORS which browser requests your backend will allow.
+    // This allows only these request methods:
+    // - GET → read transactions
+    // - POST → create transaction
+    // - PATCH → update transaction
+    // - DELETE → delete transaction
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
 
-//     // ============= // It matches your API routes. This allows the frontend to send these request headers: - Content-Type → tells the server the body format, for example JSON:Content-Type: application/json - Authorization → sends the Firebase token:
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//   }),
-// );
+    // ============= // It matches your API routes. This allows the frontend to send these request headers: - Content-Type → tells the server the body format, for example JSON:Content-Type: application/json - Authorization → sends the Firebase token:
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }),
+);
 
-app.use(cors());
+// app.use(cors());
 
 // ============= // This tells Express to read JSON request data before your routes run.
 app.use(express.json({ limit: '10kb' })); // It limits the JSON body size for each incoming request. It means Express accepts request JSON up to about 10 KB. If the limit is exceeded, Express creates an error. Then your error middleware handles it.
