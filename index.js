@@ -56,7 +56,9 @@ initializeApp({
 //   'https://finease-client-git-main.vercel.app'
 // ]
 
-const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
+// const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
+// const allowedOrigins = process.env.CLIENT_ORIGINS.split(',') // server could crash if CLIENT_ORIGINS is accidentally missing
+const allowedOrigins = (process.env.CLIENT_ORIGINS || '') // small safety improvement from server crashing if CLIENT_ORIGINS is accidentally missing
   .split(',')
   .map(origin => origin.trim())
   .filter(Boolean);
