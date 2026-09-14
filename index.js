@@ -49,6 +49,13 @@ initializeApp({
 // --------------------------------------------------
 // CORS and body parsing
 // --------------------------------------------------
+// ============== // .env can contain multiple client-side URLs. Then this code maintains it as an array.
+// [
+//   'http://localhost:5173',
+//   'https://finease-client.vercel.app',
+//   'https://finease-client-git-main.vercel.app'
+// ]
+
 const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
   .split(',')
   .map(origin => origin.trim())
